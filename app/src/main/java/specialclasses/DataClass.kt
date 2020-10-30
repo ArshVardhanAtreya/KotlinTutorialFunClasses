@@ -19,7 +19,7 @@ fun main() {
     println("user == thirdUser: ${user == thirdUser}")
 
     println(user.hashCode())                               // Equal data class instances have equal hashCode().
-    println(thirdUser.hashCode())
+    println(secondUser.hashCode())
 
     // copy() function
     println(user.copy())                                   // Auto-generated copy function makes it easy to create a new instance.
