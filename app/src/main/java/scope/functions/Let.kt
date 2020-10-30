@@ -1,6 +1,13 @@
 package scope.functions
 
 /**
+ * The Kotlin standard library contains several functions whose sole purpose is to
+ * execute a block of code within the context of an object. When we call such a function
+ * on an object with a lambda expression provided, it forms a temporary scope. In this scope,
+ * you can access the object without its name. Such functions are called scope functions.
+ * There are five of them: let, run, with, apply, and also.
+ *
+ *
  * To help choose the right scope function, here is the table of key differences between them.
  * -------------------------------------------------------------------------------------------
  * Function	    Object reference	Return value	Is extension function
@@ -20,49 +27,29 @@ package scope.functions
  * - Running statements where an expression is required: non-extension 'run'
  * - Additional effects: 'also'
  * - Grouping function calls on an object: 'with'
+ **/
 
+/**
  * The Kotlin standard library function 'let' can be used for scoping and null-checks.
  * When called on an object, let executes the given block of code and returns the result of its last expression.
  * The object is accessible inside the block by the reference it.
  * */
 
+data class People(var name: String, var age: Int, var city: String) {
+    fun moveTo(newCity: String) {
+        city = newCity
+    }
 
-fun customPrint(s: String) {
-    print(s.toUpperCase())
+    fun incrementAge() {
+        age++
+    }
 }
 
 fun main() {
-    val empty =
-        "test".let {               // Calls the given block on the result on the string "test".
-            customPrint(it)                    // Calls the function on "test" by the it reference.
-            it.isEmpty()                       // let returns the value of this expression.
-        }
-    println(" is empty: $empty")
-
-
-    fun printNonNull(str: String?) {
-        println("Printing \"$str\":")
-
-        str?.let {                         // Uses safe call, so let and its code block will be executed only on non-null values.
-            print("\t")
-            customPrint(it)
-            println()
-        }
+    People("Arsh", 30, "Bangalore").let {
+        println(it)
+        it.moveTo("Delhi")
+        it.incrementAge()
+        println(it)
     }
-    printNonNull(null)
-    printNonNull("my string")
 }
-
-//data class Person(var name: String, var age: Int, var city: String) {
-//    fun moveTo(newCity: String) { city = newCity }
-//    fun incrementAge() { age++ }
-//}
-//
-//fun main() {
-//    Person("Alice", 20, "Amsterdam").let {
-//        println(it)
-//        it.moveTo("London")
-//        it.incrementAge()
-//        println(it)
-//    }
-//}

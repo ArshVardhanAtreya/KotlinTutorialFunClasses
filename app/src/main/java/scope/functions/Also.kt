@@ -15,11 +15,11 @@ fun writeCreationLog(user: User) {
 }
 
 fun main() {
-    val jake = User(
-        "Jake",
-        30,
-        "Android developer"
-    )   // Creates a User() object with the given property values.
+   User(
+       "Jake",
+       30,
+       "Android developer"
+   )   // Creates a User() object with the given property values.
         .also {                   // Applies the given code block to the object. The return value is the object itself.
             writeCreationLog(it)  // Calls the logging function passing the object as an argument.
         }

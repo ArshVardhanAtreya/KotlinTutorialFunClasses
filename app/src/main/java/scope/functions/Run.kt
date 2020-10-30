@@ -10,10 +10,11 @@ package scope.functions
 fun main() {
     fun getNullableLength(ns: String?) {
         println("for \"$ns\":")
-        ns?.run {                                   // Calls the given block on a nullable variable.
-            println("\tis empty? " + isEmpty())     // Inside run, the object's members are accessed without its name.
+        ns?.run {                                 // Calls the given block on a nullable variable.
+            println("\tis empty? " + isEmpty())   // object's members are accessed without its name.
             println("\tlength = $length")
-            length                                  // run returns the length of the given String if it's not null.
+            println(this)
+            length                                // run returns the length of String.
         }
     }
     getNullableLength(null)
